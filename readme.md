@@ -1,3 +1,5 @@
+#Hola Mundo
+
 vamos a crear un pagina web, en la cual el
 cliente nos pide implementar una plataforma
 para poder vender sus productos y poder llevar
@@ -20,3 +22,4 @@ grupo lo mas antes posible.
 
 Mi nombre es Nury Pulgarin
 
+Mi nombre es Jose Luis Camilo Torres Meriño
