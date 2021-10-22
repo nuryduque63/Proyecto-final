@@ -1,0 +1,36 @@
+//import logo from './logo.svg';
+//import logo2 from './imagenes/logo2.jpg';
+import './App.css';
+//import { useEffect, useState } from 'react';
+//import { loadGoogleScript } from './lib/GoogleLogin';
+import Menu from "./componentes/Menu";
+//import Autentica from './componentes/Autentica';
+//import Example from "./componentes/Example";
+//import mario from './mario.png';
+//import pulsera from './imagenes/pulsera.jpg';
+
+
+
+//const googleClientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+
+function App() {
+    
+  
+  return (
+    <div className="App">
+      <header className="App-header">
+        <h1>Bienvenidos</h1>
+      </header>
+      <nav><Menu /></nav>
+      <div className="miDistribucion">
+        <section>
+       
+        </section>
+        <aside></aside>
+      </div>
+      <footer>Pagina con derechos reservados</footer>
+    </div>
+  );
+}
+
+export default App;
