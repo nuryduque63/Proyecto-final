@@ -1,0 +1,21 @@
+import React from "react";
+import Formulario from "../componentes/Formulario";
+import Titulo from "../componentes/Titulo";
+
+
+
+function Reportes() {
+    return (
+      <div>
+        <header>
+          <h1><Titulo mititulo="Inventario" /></h1>
+        </header>
+        <section>
+          <Formulario />
+        </section>
+        
+      </div>
+    );
+  }
+
+  export default Reportes;

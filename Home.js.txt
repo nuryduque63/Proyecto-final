@@ -1,0 +1,20 @@
+import React from "react";
+import Autentica from "../componentes/Autentica";
+import Titulo from "../componentes/Titulo";
+
+
+function Home() {
+    return (
+      <div>
+        <header>
+          <Titulo mititulo="Joyeria Nury" />
+        </header>
+        <section></section>
+        <aside>
+          <span><Autentica/></span>
+        </aside>
+      </div>
+    );
+  }
+
+  export default Home;

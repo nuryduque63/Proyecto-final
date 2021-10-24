@@ -1,0 +1,26 @@
+import React from "react";
+// import imagen1 from '../imagenes/imagen1.jpg';
+// import imagen2 from '../imagenes/imagen2.jpg';
+// import imagen3 from '../imagenes/imagen3.jpg';
+// import imagen4 from '../imagenes/imagen4.jpg';
+// import imagen5 from '../imagenes/imagen5.jpg';
+import Titulo from "../componentes/Titulo";
+import Formproductos from "../componentes/Formproductos";
+import './Productos.css';
+
+
+function Productos() {
+    return (
+      <div>
+        <header>
+          <h1><Titulo mititulo="Catalogo de productos" /></h1>
+         </header> 
+         <section>
+         <Formproductos />
+         </section>
+         <footer><h2>contactos: 3219260374</h2></footer>
+      </div>
+    );
+  }
+
+  export default Productos;
