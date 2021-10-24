@@ -1,0 +1,40 @@
+import React from "react";
+import './ShopRow.js';
+
+function ShopRow(props){
+
+    
+
+    return(
+        <tr>
+            <td>
+                {/* <div className="ListItem-img bg-img" style={{backgroundImage: `url(${props.img})`}}/> */}
+                <img src={props.img} width="100" height="100" alt="" />
+                <span className="ListItem-name">{props.name}</span>
+            </td>
+            <td>
+                <input
+                    className="ListItem-count"
+                    type="number"
+                    value={props.count}
+                    onChange={props.handleCountChange}
+                />
+            </td>
+            <td className="ListItem-price">
+                {props.price}
+            </td>
+            <td className="ListItem-totalPrice">
+                {props.totalPrice}
+            </td>
+            <td>
+                <input className="checkBox"
+                type="checkbox"
+                checked={props.checked}
+                onChange={props.handleCheck} 
+                />
+            </td>
+        </tr>
+    );
+}
+
+export default ShopRow;
