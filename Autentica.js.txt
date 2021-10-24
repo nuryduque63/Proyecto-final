@@ -1,0 +1,94 @@
+import React from "react";
+import { useEffect, useState } from 'react';
+import { loadGoogleScript } from '../lib/GoogleLogin';
+import './Autentica.css';
+
+function Autentica() {
+
+    const [gapi, setGapi] = useState();
+    const [googleAuth, setGoogleAuth] = useState();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    // const [imageUrl, setImageUrl] = useState();
+    
+    const onSuccess = (googleUser) => {
+        setIsLoggedIn(true);
+        const profile = googleUser.getBasicProfile();
+        setName(profile.getName());
+        setEmail(profile.getEmail());
+        // setImageUrl(profile.getImageUrl());
+    };
+    
+    const onFailure = () => {
+        setIsLoggedIn(false);
+    }
+    
+    const logOut = () => {
+        (async() => {
+        await googleAuth.signOut();
+        setIsLoggedIn(false);
+        renderSigninButton(gapi);
+        })();
+    };
+    
+    const renderSigninButton = (_gapi) => {
+        _gapi.signin2.render('google-signin', {
+        'scope': 'profile email',
+        'width': 200,
+        'height': 50,
+        'longtitle': true,
+        'theme': 'dark',
+        'onsuccess': onSuccess,
+        'onfailure': onFailure 
+        });
+    }
+    
+    
+    useEffect(() => {
+        
+        //window.gapi is available at this point
+        window.onGoogleScriptLoad = () => {
+        
+            const _gapi = window.gapi;
+            setGapi(_gapi);
+        
+            _gapi.load('auth2', () => {
+                (async () => { 
+                    const _googleAuth = await _gapi.auth2.init({
+                        client_id: "405588888659-gnpegin6v1vv2j7ve8j5q63oji01tnb5.apps.googleusercontent.com"
+                    });
+                    setGoogleAuth(_googleAuth);
+                    renderSigninButton(_gapi);
+                })();
+            });
+        }
+        
+        //ensure everything is set before loading the script
+        loadGoogleScript();
+        
+    }, []);
+
+
+    return(
+        <div>
+            {!isLoggedIn &&
+                // <span id="google-signin"></span>
+                 <div id="google-signin"></div>
+            }
+            
+            {isLoggedIn &&
+                <div>
+                    {/* <div>
+                    <img src={imageUrl} alt="imagen de google" />
+                    </div> */}
+                    <div className="datosGoogle">{name}</div>
+                    <div className="datosGoogle">{email}</div>
+                    <button className='btn-primary' onClick={logOut}>Log Out</button>
+                </div>
+            }
+          </div>
+    );
+}
+
+export default Autentica;

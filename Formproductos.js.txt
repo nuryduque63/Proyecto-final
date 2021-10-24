@@ -1,0 +1,189 @@
+import React, {useState} from 'react';
+import imagen1 from '../imagenes/imagen1.jpg';
+import imagen2 from '../imagenes/imagen2.jpg';
+import imagen3 from '../imagenes/imagen3.jpg';
+import imagen4 from '../imagenes/imagen4.jpg';
+import imagen5 from '../imagenes/imagen5.jpg';
+import './Formproductos.css';
+import ShopRow from './ShopRow';
+import TotalBlock from './TotalBlock';
+//import axios from 'axios';
+
+function Formproductos(){
+
+
+    const shopCarList = [
+        {
+            name : "Pulsera",
+            img : imagen1,
+            price : 10,
+            count : 1,
+            totalPrice : 10,
+            isChecked : false
+        },
+        {
+            name : "Pulsera",
+            img : imagen2,
+            price : 20,
+            count : 1,
+            totalPrice : 20,
+            isChecked : false
+        },
+        {
+            name : "Pulsera",
+            img : imagen3,
+            price : 30,
+            count : 1,
+            totalPrice : 30,
+            isChecked : false
+        },
+        {
+            name : "Pulsera",
+            img : imagen4,
+            price : 40,
+            count : 1,
+            totalPrice : 40,
+            isChecked : false
+        },
+        {
+            name : "Pulsera",
+            img : imagen5,
+            price : 50,
+            count : 1,
+            totalPrice : 50,
+            isChecked : false
+        }
+    ];
+
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [isCheckedAll, setIsCheckedAll] = useState(false);
+    const [list, setList] = useState(shopCarList);
+
+    
+    const handleBuy = () => {
+        alert('Compra realizada');
+    }
+
+    const handleCheck = (event, index) => {
+        list[index].isChecked = event.target.checked;
+        setList(list);
+
+        let checkedCache = new Array(0);
+        list.forEach((item) => {checkedCache.push(item.isChecked)});
+
+        setIsCheckedAll(checkedCache.every(isChecked => isChecked));
+        setTotalPrice(handleTotalPrice);
+    }
+
+    const handleTotalPrice = () => {
+        let totalPrice = 0;
+        list.forEach((item) => {
+            if(item.isChecked) {
+                totalPrice += item.count * item.price;
+            }
+        });
+
+        return totalPrice;
+    }
+
+    const handleCountChange = (event, index) => {
+        list[index].count = event.target.value;
+        list[index].totalPrice = event.target.value * list[index].price;
+
+        setList(list);
+
+        setTotalPrice(handleTotalPrice());
+        
+    }
+   
+
+    return(
+       
+        <div>
+            {/* <thead>
+                <tr>
+                    <th>PRODUCTO</th>
+                    <th>DESCRIPCION</th>
+                    <th>PRECIO UNITARIO</th>
+                    <th>DISPONIBILIDAD</th>
+                    <th>CANTIDAD QUE DESEA LLEVAR</th>
+                    <th>VALOR TOTAL</th>
+                </tr>
+                <tr>
+                    <th><img src={imagen1} width="100" height="100" alt=""/></th>
+                    <th>pulsera</th>
+                    <th>50000</th>
+                    <th>20</th>
+                    <th><input type="number" /></th>
+                    <th>20000</th>
+                </tr>
+                <tr>
+                    <th><img src={imagen2} width="100" height="100" alt=""/></th>
+                    <th>pulsera</th>
+                    <th>50000</th>
+                    <th>20</th>
+                    <th><input type="number" /></th>
+                    <th>20000</th>
+                </tr>
+                <tr>
+                    <th><img src={imagen3} width="100" height="100" alt=""/></th>
+                    <th>pulsera</th>
+                    <th>50000</th>
+                    <th>20</th>
+                    <th><input type="number" /></th>
+                    <th>20000</th>
+                </tr>
+                <tr>
+                    <th><img src={imagen4} width="100" height="100" alt=""/></th>
+                    <th>pulsera</th>
+                    <th>50000</th>
+                    <th>20</th>
+                    <th><input type="number" /></th>
+                    <th>20000</th>
+                </tr>
+            </thead> */}
+
+            <thead>
+                <th>Imagen del producto, descripcion</th>
+                <th>Cantidad para llevar</th>
+                <th>Precio unitario</th>
+                <th>Precio total</th>
+                <th>Seleccionar todo
+                    <input type="checkbox"
+                    checked={isCheckedAll}
+                    />
+                </th>
+            </thead>    
+            <tbody>
+                {
+                    shopCarList.map((item, index) => {
+                        return(
+                            <ShopRow
+                                key={index}
+                                img={item.img}
+                                name={item.name}
+                                count={item.count}
+                                totalPrice={item.totalPrice}
+                                isChecked={item.isChecked}
+                                handleCheck={(e) => {handleCheck(e, index)}}
+                                handleCountChange={(e) => {handleCountChange(e, index)}}
+                            />
+                        );
+                    })
+                }
+            </tbody>
+
+
+            <TotalBlock totalPrice={totalPrice} />
+
+            <button onClick={handleBuy}>Aceptar</button>
+            <button>Cancelar</button>
+        
+                {/* <img src={fotos.map(item => item.foto)} width="100" height="100" alt="" />
+                <h2>{fotos.map(item => item.descripcion) }</h2> */}
+            
+        </div>
+    );
+}
+
+export default Formproductos;
