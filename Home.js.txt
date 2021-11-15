@@ -5,7 +5,7 @@ import Titulo from "../componentes/Titulo";
 
 function Home() {
     return (
-      <div>
+      <div classname="Presentacion">
         <header>
           <Titulo mititulo="Joyeria Nury" />
         </header>
